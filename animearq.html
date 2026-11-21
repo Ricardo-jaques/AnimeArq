@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArqComp Anime RPG // Core Breaker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="arena-wrapper">
+        <header class="anime-header">
+            <div class="rank-tag">RANK S // ARQ-COMP ANIME EDITION</div>
+            <h1>CORE <span class="c-cyan">BREAKER</span> <span class="c-magenta">ANIME</span></h1>
+            <p class="subtitle">Desbloqueie os 12 selos de hardware e derrote cada entidade do sistema.</p>
+        </header>
+
+        <section class="top-hud">
+            <div class="hud-stat">
+                <span class="hud-label">SELOS QUEBRADOS</span>
+                <strong id="contador-acertos" class="hud-val">0 de 12 palavras</strong>
+            </div>
+            <div class="hud-stat">
+                <span class="hud-label">COMBO</span>
+                <strong id="combo-display" class="hud-val combo-neon">0x</strong>
+            </div>
+            <div class="hud-buttons">
+                <button id="btn-conferir" type="button" class="btn btn-attack">CONFERIR / ATACAR</button>
+                <button id="btn-reiniciar" type="button" class="btn btn-reset">REINICIAR</button>
+            </div>
+        </section>
+
+        <main class="battle-grid">
+            <!-- Arena de Batalha Estilo Anime -->
+            <section id="battle-stage" class="battle-stage">
+                <div class="enemy-top">
+                    <div>
+                        <span id="alvo-direcao" class="dir-badge">HORIZONTAL</span>
+                        <h2 id="inimigo-nome" class="enemy-name">Golem Embarcado</h2>
+                    </div>
+                    <span id="alvo-numero" class="seal-num">#01</span>
+                </div>
+
+                <div class="hp-container">
+                    <div class="hp-info">
+                        <span>HP DO NÚCLEO</span>
+                        <span id="hp-texto">100 / 100</span>
+                    </div>
+                    <div class="hp-bar-bg">
+                        <div id="hp-bar-fill" class="hp-bar-fill"></div>
+                    </div>
+                </div>
+
+                <div id="anime-avatar-box" class="avatar-box">
+                    <div id="slash-fx" class="slash-fx">SLASH!!</div>
+                    <div id="avatar-sigil" class="avatar-sigil">⚡</div>
+                    <p id="avatar-sub" class="avatar-sub">LETRAS DO SELO: 16</p>
+                </div>
+
+                <div class="clue-card">
+                    <span class="clue-tag">PISTA DO TÉCNICO</span>
+                    <p id="pista-ativa" class="clue-text">
+                        Chip único que integra processador, memória e periféricos para sistemas embarcados.
+                    </p>
+                </div>
+
+                <div class="attack-box">
+                    <label for="input-resposta" class="attack-label">DIGITE A TÉCNICA / TERMO (SEM ESPAÇO OU ACENTO)</label>
+                    <div class="attack-row">
+                        <input
+                            type="text"
+                            id="input-resposta"
+                            class="attack-input"
+                            placeholder="EX: MICROCONTROLADOR"
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                        <button id="btn-proximo" type="button" class="btn btn-ghost">PRÓXIMO →</button>
+                    </div>
+                    <p id="feedback-msg" class="feedback-msg">Aguardando comando de ataque...</p>
+                </div>
+            </section>
+
+            <!-- Painel de Pistas Separadas em Horizontais e Verticais -->
+            <aside class="missions-panel">
+                <div class="mission-box">
+                    <h3 class="c-cyan">ALVOS HORIZONTAIS</h3>
+                    <ul id="lista-horizontais" class="target-list"></ul>
+                </div>
+
+                <div class="mission-box">
+                    <h3 class="c-magenta">ALVOS VERTICAIS</h3>
+                    <ul id="lista-verticais" class="target-list"></ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
