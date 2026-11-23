@@ -122,10 +122,16 @@ const listaVerticaisEl = document.getElementById("lista-verticais");
 const btnConferir = document.getElementById("btn-conferir");
 const btnReiniciar = document.getElementById("btn-reiniciar");
 const btnProximo = document.getElementById("btn-proximo");
-
+const scoreDisplayEl = document.getElementById("score-display");
+const timerDisplayEl = document.getElementById("timer-display");
+const btnDica = document.getElementById("btn-dica");
+let score = 0;
+let segundosDecorridos = 0;
+let timerInterval = null;
 function atualizarHud() {
     const acertos = resolvidos.filter(Boolean).length;
     contadorAcertosEl.textContent = `${acertos} de ${alvos.length} palavras`;
+    scoreDisplayEl.textContent = `${score} PTS`;
     comboDisplayEl.textContent = `${combo}x`;
 }
 
@@ -169,6 +175,16 @@ function renderizarListas() {
     });
 }
 
+function iniciarTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        segundosDecorridos++;
+        const min = String(Math.floor(segundosDecorridos / 60)).padStart(2, "0");
+        const seg = String(segundosDecorridos % 60).padStart(2, "0");
+        timerDisplayEl.textContent = `${min}:${seg}`;
+    }, 1000);
+}
+
 function renderizarArena() {
     const alvo = alvos[indiceAtual];
     const derrotado = resolvidos[indiceAtual];
@@ -198,6 +214,36 @@ function renderizarArena() {
     }
 }
 
+function usarScanner() {
+    if (resolvidos[indiceAtual]) return;
+
+    const alvo = alvos[indiceAtual];
+    const atual = inputRespostaEl.value;
+    let novoTexto = "";
+    let revelou = false;
+
+    for (let i = 0; i < alvo.resposta.length; i++) {
+        if (!revelou && atual[i] !== alvo.resposta[i]) {
+            novoTexto += alvo.resposta[i];
+            revelou = true;
+        } else {
+            novoTexto += atual[i] || "";
+        }
+    }
+
+    combo = 0;
+    score = Math.max(0, score - 150);
+    inputRespostaEl.value = novoTexto;
+    tentativasDigitadas[indiceAtual] = novoTexto;
+
+    feedbackMsgEl.textContent = "SCANNER ATIVADO! Uma letra do núcleo foi revelada (-150 PTS).";
+    feedbackMsgEl.className = "feedback-msg";
+
+    atualizarHud();
+    renderizarSlots(novoTexto, false);
+    inputRespostaEl.focus();
+}
+
 function dispararSlash() {
     slashFxEl.classList.add("ativo");
     setTimeout(() => {
@@ -214,11 +260,14 @@ function tremerArena() {
 function conferirAtaque() {
     const alvo = alvos[indiceAtual];
     const palpite = inputRespostaEl.value
+    
         .trim()
         .toUpperCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^A-Z]/g, "");
+        combo++;
+score += 250 + (combo * 50);
 
     tentativasDigitadas[indiceAtual] = palpite;
 
@@ -264,9 +313,14 @@ function reiniciarJogo() {
         tentativasDigitadas[i] = "";
     }
     indiceAtual = 0;
+
     combo = 0;
     feedbackMsgEl.textContent = "Sistema reiniciado! Todos os selos voltaram ao normal.";
     feedbackMsgEl.className = "feedback-msg";
+    score = 0;
+segundosDecorridos = 0;
+timerDisplayEl.textContent = "00:00";
+iniciarTimer();
     atualizarHud();
     renderizarArena();
     renderizarListas();
@@ -292,6 +346,8 @@ inputRespostaEl.addEventListener("keydown", (e) => {
 btnConferir.addEventListener("click", conferirAtaque);
 btnProximo.addEventListener("click", proximoAlvo);
 btnReiniciar.addEventListener("click", reiniciarJogo);
+btnDica.addEventListener("click", usarScanner);
+iniciarTimer();
 
 atualizarHud();
 renderizarArena();

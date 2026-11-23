@@ -14,20 +14,42 @@
             <p class="subtitle">Desbloqueie os 12 selos de hardware e derrote cada entidade do sistema.</p>
         </header>
 
-        <section class="top-hud">
-            <div class="hud-stat">
-                <span class="hud-label">SELOS QUEBRADOS</span>
-                <strong id="contador-acertos" class="hud-val">0 de 12 palavras</strong>
-            </div>
-            <div class="hud-stat">
-                <span class="hud-label">COMBO</span>
-                <strong id="combo-display" class="hud-val combo-neon">0x</strong>
-            </div>
-            <div class="hud-buttons">
-                <button id="btn-conferir" type="button" class="btn btn-attack">CONFERIR / ATACAR</button>
-                <button id="btn-reiniciar" type="button" class="btn btn-reset">REINICIAR</button>
-            </div>
-        </section>
+     
+<section class="top-hud">
+    <div class="hud-stat">
+        <span class="hud-label">SELOS QUEBRADOS</span>
+        <strong id="contador-acertos" class="hud-val">0 de 12 palavras</strong>
+    </div>
+    <div class="hud-stat">
+        <span class="hud-label">SCORE</span>
+        <strong id="score-display" class="hud-val">0 PTS</strong>
+    </div>
+    <div class="hud-stat">
+        <span class="hud-label">COMBO</span>
+        <strong id="combo-display" class="hud-val combo-neon">0x</strong>
+    </div>
+    <div class="hud-stat">
+        <span class="hud-label">TEMPO</span>
+        <strong id="timer-display" class="hud-val">00:00</strong>
+    </div>
+    <div class="hud-buttons">
+        <button id="btn-conferir" type="button" class="btn btn-attack">CONFERIR / ATACAR</button>
+        <button id="btn-reiniciar" type="button" class="btn btn-reset">REINICIAR</button>
+    </div>
+</section>
+
+<div class="attack-row">
+    <input
+        type="text"
+        id="input-resposta"
+        class="attack-input"
+        placeholder="EX: MICROCONTROLADOR"
+        autocomplete="off"
+        spellcheck="false"
+    >
+    <button id="btn-dica" type="button" class="btn btn-scan" title="Revela uma letra">SCANNER</button>
+    <button id="btn-proximo" type="button" class="btn btn-ghost">PRÓXIMO →</button>
+</div>
 
         <main class="battle-grid">
             <!-- Arena de Batalha Estilo Anime -->

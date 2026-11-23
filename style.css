@@ -484,3 +484,15 @@ body {
     color: var(--green);
     box-shadow: 0 0 10px rgba(0, 245, 155, 0.3);
 }
+
+.btn-scan {
+    background: rgba(255, 61, 242, 0.15);
+    color: var(--magenta);
+    border: 1px solid var(--magenta);
+}
+
+.btn-scan:hover {
+    background: var(--magenta);
+    color: var(--bg-void);
+    box-shadow: 0 0 14px rgba(255, 61, 242, 0.5);
+}
