@@ -187,12 +187,14 @@ function renderizarArena() {
         hpBarFillEl.style.width = "0%";
         inputRespostaEl.value = alvo.resposta;
         inputRespostaEl.disabled = true;
+        renderizarSlots(alvo.resposta, true);
     } else {
         hpTextoEl.textContent = "100 / 100";
         hpBarFillEl.style.width = "100%";
         inputRespostaEl.value = tentativasDigitadas[indiceAtual] || "";
         inputRespostaEl.disabled = false;
         inputRespostaEl.focus();
+        renderizarSlots(tentativasDigitadas[indiceAtual] || "", false);
     }
 }
 
@@ -276,6 +278,7 @@ inputRespostaEl.addEventListener("input", (e) => {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^A-Z]/g, "");
+    renderizarSlots(e.target.value, false);
 });
 
 inputRespostaEl.addEventListener("keydown", (e) => {
@@ -283,6 +286,8 @@ inputRespostaEl.addEventListener("keydown", (e) => {
         conferirAtaque();
     }
 });
+
+
 
 btnConferir.addEventListener("click", conferirAtaque);
 btnProximo.addEventListener("click", proximoAlvo);

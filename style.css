@@ -448,3 +448,39 @@ body {
         flex-direction: column;
     }
 }
+
+.word-slots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 14px 0 10px;
+}
+
+.letter-slot {
+    width: 28px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 8, 22, 0.85);
+    border: 1px solid rgba(45, 226, 255, 0.35);
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--cyan);
+    transition: all 0.15s ease;
+}
+
+.letter-slot.filled {
+    border-color: var(--magenta);
+    box-shadow: 0 0 8px rgba(255, 61, 242, 0.35);
+    color: var(--text-light);
+}
+
+.letter-slot.solved {
+    border-color: var(--green);
+    background: rgba(0, 245, 155, 0.15);
+    color: var(--green);
+    box-shadow: 0 0 10px rgba(0, 245, 155, 0.3);
+}
